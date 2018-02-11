@@ -10,7 +10,7 @@ const machine = {
   // state names just as namespaces
     'idle': {
       click: function () {
-        // click
+        this.changeStateTo('fetching');
       }
     },
     'fetching': {
@@ -30,8 +30,10 @@ const machine = {
     this.state = newState;
   },
   dispatch: function(actionName) {
-    // action as a function
     const action = this.transitions[this.state][actionName];
+    if (action) {
+      action();
+    }
   }
 
 }
